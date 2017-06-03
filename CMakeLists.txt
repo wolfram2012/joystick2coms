@@ -52,7 +52,14 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    CanMessage.msg
-   VehicleMessage.msg
+   coms_msg/VehicleMessage.msg
+   LWimu_msg/LWimuID70.msg
+   LWimu_msg/LWimuID71.msg
+   LWimu_msg/LWimuID72.msg
+   LWimu_msg/LWimuID75.msg
+   LWimu_msg/LWimuID76.msg
+   LWimu_msg/LWimuID78.msg
+   LWimu_msg/LWimuID79.msg
 #   Message1.msg
 #   Message2.msg
  )

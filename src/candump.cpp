@@ -66,7 +66,8 @@
 #include "lib.h"
 #include "ros/ros.h"
 #include "std_msgs/String.h"
-#include "joystick2coms/CanMessage.h"
+//#include "joystick2coms/CanMessage.h"
+//#include "joystick2coms/VehicleMessage.h"
 #include "coms_filter.h"
 
 #define MAXSOCK 16    /* max. number of CAN interfaces given on the cmdline */
@@ -160,7 +161,16 @@ int main(int argc, char **argv)
         ros::init(argc, argv, "dumptest");
 	ros::NodeHandle n;
 //	ros::Publisher pub = n.advertise<std_msgs::String>("pub_test",2);
-	ros::Publisher canpub = n.advertise<joystick2coms::CanMessage>("can_fram_pub",2);	
+	ros::Publisher canpub = n.advertise<joystick2coms::CanMessage>("can_raw_pub",2);
+	ros::Publisher coms_steering_pub = n.advertise<joystick2coms::VehicleMessage>("/coms/steering_pub",2);
+	ros::Publisher coms_speed_pub = n.advertise<joystick2coms::VehicleMessage>("/coms/speed_pub",2);	
+	ros::Publisher LW_imu_ID70 = n.advertise<joystick2coms::LWimuID70>("/LW_Imu/ID70",2);
+	ros::Publisher LW_imu_ID71 = n.advertise<joystick2coms::LWimuID71>("/LW_Imu/ID71",2);
+	ros::Publisher LW_imu_ID72 = n.advertise<joystick2coms::LWimuID72>("/LW_Imu/ID72",2);
+	ros::Publisher LW_imu_ID75 = n.advertise<joystick2coms::LWimuID75>("/LW_Imu/ID75",2);
+	ros::Publisher LW_imu_ID76 = n.advertise<joystick2coms::LWimuID76>("/LW_Imu/ID76",2);
+	ros::Publisher LW_imu_ID78 = n.advertise<joystick2coms::LWimuID78>("/LW_Imu/ID78",2);
+	ros::Publisher LW_imu_ID79 = n.advertise<joystick2coms::LWimuID79>("/LW_Imu/ID79",2);
 	joystick2coms::CanMessage can_frame;
 	
 	fd_set rdfs;
@@ -180,7 +190,10 @@ int main(int argc, char **argv)
 	struct ifreq ifr;
 	struct timeval tv, last_tv;
 	struct timeval timeout, timeout_config = { 0, 0 };
-	comsfilter::pub_set canpub_set = {canpub,{canpub,canpub},{1}};
+	comsfilter::pub_set canpub_set = { canpub,
+					   { coms_steering_pub,coms_speed_pub },
+					   { LW_imu_ID70, LW_imu_ID71, LW_imu_ID72, LW_imu_ID75, LW_imu_ID76, LW_imu_ID78, LW_imu_ID79 }
+					 };
 
 	signal(SIGTERM, sigterm);
 	signal(SIGHUP, sigterm);
