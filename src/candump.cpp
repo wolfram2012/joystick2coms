@@ -67,6 +67,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "joystick2coms/CanMessage.h"
+#include "coms_filter.h"
 
 #define MAXSOCK 16    /* max. number of CAN interfaces given on the cmdline */
 #define MAXIFNAMES 30 /* size of receive name index to omit ioctls */
@@ -90,9 +91,6 @@ static int  dindex[MAXIFNAMES];
 static int  max_devname_len; /* to prevent frazzled device name output */ 
 const int canfd_on = 1;
 
-#define MAXANI 4
-const char anichar[MAXANI] = {'|', '/', '-', '\\'};
-const char extra_m_info[4][4] = {"- -", "B -", "- E", "B E"};
 
 extern int optind, opterr, optopt;
 
@@ -161,12 +159,9 @@ int main(int argc, char **argv)
 	
         ros::init(argc, argv, "dumptest");
 	ros::NodeHandle n;
-	ros::Publisher pub = n.advertise<std_msgs::String>("pub_test",2);
-	ros::Publisher canpub = n.advertise<joystick2coms::CanMessage>("can_fram_pub",2);
-	std_msgs::String msgzz;
-	std::stringstream ss;	
+//	ros::Publisher pub = n.advertise<std_msgs::String>("pub_test",2);
+	ros::Publisher canpub = n.advertise<joystick2coms::CanMessage>("can_fram_pub",2);	
 	joystick2coms::CanMessage can_frame;
-	
 	
 	fd_set rdfs;
 	int s[MAXSOCK];
@@ -185,6 +180,7 @@ int main(int argc, char **argv)
 	struct ifreq ifr;
 	struct timeval tv, last_tv;
 	struct timeval timeout, timeout_config = { 0, 0 };
+	comsfilter::pub_set canpub_set = {canpub,{canpub,canpub},{1}};
 
 	signal(SIGTERM, sigterm);
 	signal(SIGHUP, sigterm);
@@ -209,10 +205,7 @@ int main(int argc, char **argv)
 
 	for (i=0; i < currmax; i++) {
 
-		if (optind == argc) 
-			ptr = (char*)"slcan0";
-		else
-			ptr = argv[optind+i];
+		ptr = argv[optind+i];
 
 
 		s[i] = socket(PF_CAN, SOCK_RAW, CAN_RAW);
@@ -323,11 +316,11 @@ int main(int argc, char **argv)
 				}
 
 				/* once we detected a EFF frame indent SFF frames accordingly */
-				if (frame.can_id & CAN_EFF_FLAG)
-					view |= CANLIB_VIEW_INDENT_SFF;
+//				if (frame.can_id & CAN_EFF_FLAG)
+//					view |= CANLIB_VIEW_INDENT_SFF;
 
-				fprint_long_canframe(stdout, &frame, NULL, view, maxdlen);
-				printf("\n");
+//				fprint_long_canframe(stdout, &frame, NULL, view, maxdlen);
+//				printf("\n");
 
 
 				can_frame.id = (uint32_t)(frame.can_id & 0x1FFFFFFF);
@@ -337,8 +330,7 @@ int main(int argc, char **argv)
     				{
 					can_frame.data[i] = frame.data[i];
     				}
-				
-				canpub.publish(can_frame);
+				comsfilter::ros_publish(canpub_set,&can_frame);
 			}
 
 		out_fflush:

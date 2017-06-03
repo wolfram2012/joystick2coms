@@ -34,4 +34,12 @@
        />
     </group>
 
+    <group ns="/">
+      <node 
+        pkg="joystick2coms" 
+        name="candump" 
+        type="dumptest" 
+        args="slcan0"
+       />
+    </group>
 </launch>

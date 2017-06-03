@@ -52,6 +52,7 @@ find_package(catkin REQUIRED COMPONENTS
  add_message_files(
    FILES
    CanMessage.msg
+   VehicleMessage.msg
 #   Message1.msg
 #   Message2.msg
  )
@@ -226,7 +227,8 @@ target_link_libraries(can2dev ${catkin_LIBRARIES} data2msg)
 add_dependencies(can2dev ${PROJECT_NAME}_gencfg)
 
 add_executable(dumptest src/candump.cpp)
-add_library(libb src/lib.cpp)
-target_link_libraries(dumptest ${catkin_LIBRARIES} libb)
+#add_library(libb src/lib.cpp)
+add_library(comsfilter src/coms_filter.cpp)
+target_link_libraries(dumptest ${catkin_LIBRARIES} libb comsfilter)
 
 

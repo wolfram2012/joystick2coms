@@ -1,5 +1,5 @@
-#ifndef HEAD_H
-#define HEAD_H
+#ifndef DATA2MSG_H
+#define DATA2MSG_H
 
 #include <stdio.h>
 #include <stdint.h>
