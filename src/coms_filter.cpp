@@ -8,41 +8,27 @@ namespace comsfilter
     //coms_steering_angle
     void vehicleAngle(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::VehicleMessage angle;
-        printf("canID: %d | canData: ",can_frame->id);
-	for(int i=0; i<8; i++)
-        {
-	    printf("%X ",can_frame->data[i]);
-        }
-	printf("\n");
-
+	joystick2coms::VehicleMessage data;
 	//TODO	
-	angle.data = can_frame->data[1] + 1;
+	data.data = can_frame->data[1] + 1;
 
 
 
 	//TODO END	
-	pub_handle.publish(angle);
+	pub_handle.publish(data);
     }
 
     //coms_steering_angle
     void vehicleSpeed(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::VehicleMessage speed;
-        printf("canID: %d | canData: ",can_frame->id);
-	for(int i=0; i<8; i++)
-        {
-	    printf("%X ",can_frame->data[i]);
-        }
-	printf("\n");
-	
+	joystick2coms::VehicleMessage data;
 	//TODO
-	speed.data = can_frame->data[1] + 1;
+	data.data = can_frame->data[1] + 1;
 
 
 
 	//TODO END
-	pub_handle.publish(speed);
+	pub_handle.publish(data);
     }
 
     /*Message from Vehicle END*/
@@ -56,9 +42,7 @@ namespace comsfilter
     {
 	joystick2coms::LWimuID70 date;
 	//TODO
-	//data.data = can_frame->data[1] + 1;
-
-
+	//data.anglex = can_frame->data[1]*256 + can_frame->data[0];
 
 	//TODO END
 	//pub_handle.publish(data);

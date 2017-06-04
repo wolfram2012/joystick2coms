@@ -1,1 +1,1 @@
-uint32 data
+float64 data
