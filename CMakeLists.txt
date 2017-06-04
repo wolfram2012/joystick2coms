@@ -8,11 +8,12 @@ project(joystick2coms)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  message_generation
   roscpp
   rospy
   std_msgs
+  message_generation
   dynamic_reconfigure
+
 )
 
 ## System dependencies are found with CMake's conventions
@@ -51,8 +52,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
  add_message_files(
    FILES
-   CanMessage.msg
    coms_msg/VehicleMessage.msg
+   CanMessage.msg   
    LWimu_msg/LWimuID70.msg
    LWimu_msg/LWimuID71.msg
    LWimu_msg/LWimuID72.msg
@@ -212,7 +213,7 @@ catkin_package(
 # catkin_add_nosetests(test)
 
 
-include_directories(include ${catkin_INCLUDE_DIRS})
+include_directories(${catkin_INCLUDE_DIRS} include)
 link_directories(${catkin_LIB_DIRS} lib)
 
 
