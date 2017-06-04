@@ -5,27 +5,13 @@ namespace comsfilter
 
     /*Message from Vehicle*/
 
-    //coms_steering_angle
-    void vehicleAngle(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
-    {
-	joystick2coms::VehicleMessage data;
-	//TODO	
-	data.data = can_frame->data[1] + 1;
-
-
-
-	//TODO END	
-	pub_handle.publish(data);
-    }
-
-    //coms_steering_angle
-    void vehicleSpeed(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
+    //coms: steering_angle and speed
+    void vehicleMessage(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
 	joystick2coms::VehicleMessage data;
 	//TODO
-	data.data = can_frame->data[1] + 1;
-
-
+	data.steering = 0;
+	data.speed = 0;
 
 	//TODO END
 	pub_handle.publish(data);
@@ -142,11 +128,8 @@ namespace comsfilter
 	set.canpub.publish(*can_frame);
 	switch(can_frame->id)
     	{
-	    case 91:
-	    	vehicleSpeed(set.coms_msg.coms_steering_angle,can_frame);
-	        break;
-	    case 92:
-	        vehicleAngle(set.coms_msg.coms_longitude_speed,can_frame);
+	    case 93:
+	        vehicleMessage(set.coms_msg.coms_vehicle_msg,can_frame);
 	    	break;
 	    case 70:
 	        LwImuID70(set.LWimu_msg.LWimu_ID70,can_frame);

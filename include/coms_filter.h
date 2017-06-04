@@ -20,8 +20,7 @@ namespace comsfilter
     	
     struct coms_msg
     {
-	ros::Publisher coms_steering_angle;
-	ros::Publisher coms_longitude_speed;
+	ros::Publisher coms_vehicle_msg;
     };
 
     struct LWimu_msg
@@ -43,8 +42,7 @@ namespace comsfilter
     };
 
     //Message from Vehicle
-    void vehicleAngle(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame);
-    void vehicleSpeed(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame);
+    void vehicleMessage(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame);
 
     //Message from LWimu
     void LwImuID70(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame);

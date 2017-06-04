@@ -162,8 +162,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle n;
 //	ros::Publisher pub = n.advertise<std_msgs::String>("pub_test",2);
 	ros::Publisher canpub = n.advertise<joystick2coms::CanMessage>("can_raw_pub",2);
-	ros::Publisher coms_steering_pub = n.advertise<joystick2coms::VehicleMessage>("/coms/steering_pub",2);
-	ros::Publisher coms_speed_pub = n.advertise<joystick2coms::VehicleMessage>("/coms/speed_pub",2);	
+	ros::Publisher vehicle_message = n.advertise<joystick2coms::VehicleMessage>("/coms/vehiclemessage",2);	
 	ros::Publisher LW_imu_ID70 = n.advertise<joystick2coms::LWimuID70>("/LW_Imu/ID70",2);
 	ros::Publisher LW_imu_ID71 = n.advertise<joystick2coms::LWimuID71>("/LW_Imu/ID71",2);
 	ros::Publisher LW_imu_ID72 = n.advertise<joystick2coms::LWimuID72>("/LW_Imu/ID72",2);
@@ -191,7 +190,7 @@ int main(int argc, char **argv)
 	struct timeval tv, last_tv;
 	struct timeval timeout, timeout_config = { 0, 0 };
 	comsfilter::pub_set canpub_set = { canpub,
-					   { coms_steering_pub,coms_speed_pub },
+					   { vehicle_message },
 					   { LW_imu_ID70, LW_imu_ID71, LW_imu_ID72, LW_imu_ID75, LW_imu_ID76, LW_imu_ID78, LW_imu_ID79 }
 					 };
 

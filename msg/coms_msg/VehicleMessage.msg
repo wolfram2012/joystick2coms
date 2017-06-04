@@ -1,1 +1,2 @@
-float64 data
+float64 speed
+float64 steering
