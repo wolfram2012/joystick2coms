@@ -40,87 +40,94 @@ namespace comsfilter
     //ID70: AngleX, AngleY, AngleZ, T
     void LwImuID70(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::LWimuID70 date;
+	joystick2coms::LWimuID70 data;
 	//TODO
-	//data.anglex = can_frame->data[1]*256 + can_frame->data[0];
+	data.anglex = 0;
+	data.angley = 0;
+	data.anglez = 0;
+	data.T = 0;
 
 	//TODO END
-	//pub_handle.publish(data);
+	pub_handle.publish(data);
     }
 
-    //ID70: AngleX, AngleY, AngleZ, T
+    //ID71: AccelX, AccelY, AccelZ
     void LwImuID71(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::LWimuID71 date;
+	joystick2coms::LWimuID71 data;
 	//TODO
-	//data.data = can_frame->data[1] + 1;
-
-
+	data.accelx = 0;
+	data.accely = 0;
+	data.accelz = 0;
 
 	//TODO END
-	//pub_handle.publish(data);
+	pub_handle.publish(data);
     }
 
-    //ID70: AngleX, AngleY, AngleZ, T
+    //ID72: CompassX, CompassY, CompassZ
     void LwImuID72(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::LWimuID72 date;
+	joystick2coms::LWimuID72 data;
 	//TODO
-	//data.data = can_frame->data[1] + 1;
-
-
+	data.compassx = 0;
+	data.compassy = 0;
+	data.compassz = 0;
 
 	//TODO END
-	//pub_handle.publish(data);
+	pub_handle.publish(data);
     }
 
-    //ID70: AngleX, AngleY, AngleZ, T
+    //ID75: GPSmode, StarNum, HDOP, High, UTC:h/m/s/ms
     void LwImuID75(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::LWimuID75 date;
+	joystick2coms::LWimuID75 data;
 	//TODO
-	//data.data = can_frame->data[1] + 1;
-
-
+	data.GPSmode = 0;
+	data.starNum = 0;
+	data.HDOP = 0;
+	data.hight = 0;
+	data.UTCh = 0;
+	data.UTCm = 0;
+	data.UTCs = 0;
+	data.UTCms = 0;
 
 	//TODO END
-	//pub_handle.publish(data);
+	pub_handle.publish(data);
     }
 
-    //ID70: AngleX, AngleY, AngleZ, T
+    //ID76: GPSL, GPSR
     void LwImuID76(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::LWimuID76 date;
+	joystick2coms::LWimuID76 data;
 	//TODO
-	//data.data = can_frame->data[1] + 1;
-
-
+	data.GPSl = 0;
+	data.GPSr = 0;
 
 	//TODO END
-	//pub_handle.publish(data);
+	pub_handle.publish(data);
     }
 
-    //ID70: AngleX, AngleY, AngleZ, T
+    //ID78: Roll, Pitch, Yaw, PZ
     void LwImuID78(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::LWimuID78 date;
+	joystick2coms::LWimuID78 data;
 	//TODO
-	//data.data = can_frame->data[1] + 1;
-
-
+	data.roll = 0;
+	data.pitch = 0;
+	data.yaw = 0;
+	data.pz = 0;
 
 	//TODO END
-	//pub_handle.publish(data);
+	pub_handle.publish(data);
     }
 
-    //ID70: AngleX, AngleY, AngleZ, T
+    //ID79: PositionX, PositionY
     void LwImuID79(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::LWimuID79 date;
+	joystick2coms::LWimuID79 data;
 	//TODO
-	//data.data = can_frame->data[1] + 1;
-
-
+	data.positionx = 0;
+	data.positiony = 0;
 
 	//TODO END
 	//pub_handle.publish(data);
