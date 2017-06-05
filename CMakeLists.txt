@@ -13,6 +13,8 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   message_generation
   dynamic_reconfigure
+  nav_msgs
+  tf
 
 )
 
@@ -239,4 +241,6 @@ add_executable(dumptest src/candump.cpp)
 add_library(comsfilter src/coms_filter.cpp)
 target_link_libraries(dumptest ${catkin_LIBRARIES} libb comsfilter)
 
+add_executable(trajectory src/coms_trajectory.cpp)
+target_link_libraries(trajectory ${catkin_LIBRARIES})
 
