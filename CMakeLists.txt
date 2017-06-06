@@ -244,3 +244,5 @@ target_link_libraries(dumptest ${catkin_LIBRARIES} libb comsfilter)
 add_executable(trajectory src/coms_trajectory.cpp)
 target_link_libraries(trajectory ${catkin_LIBRARIES})
 
+add_executable(coms_tf_broadcaster src/coms_tf.cpp)
+target_link_libraries(coms_tf_broadcaster ${catkin_LIBRARIES})
