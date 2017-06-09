@@ -14,7 +14,9 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
   dynamic_reconfigure
   nav_msgs
+  geometry_msgs
   tf
+  visualization_msgs
 
 )
 

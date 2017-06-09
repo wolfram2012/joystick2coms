@@ -1,0 +1,27 @@
+<launch>
+
+    <group ns="/">
+      <node 
+        pkg="joystick2coms" 
+        name="dumptest" 
+        type="dumptest"
+       />
+    </group>
+
+    <group ns="/">
+      <node 
+        pkg="joystick2coms" 
+        name="coms_tf_broadcaster" 
+        type="coms_tf_broadcaster"
+       />
+    </group>
+
+    <group ns="/">
+      <node 
+        pkg="joystick2coms" 
+        name="trajectory" 
+        type="trajectory"
+       />
+    </group>
+
+</launch>
