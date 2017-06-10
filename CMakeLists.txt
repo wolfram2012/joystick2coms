@@ -56,7 +56,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
  add_message_files(
    FILES
-   coms_msg/VehicleMessage.msg
+   coms_msg/VehicleMessageStamp.msg
    CanMessage.msg   
    LWimu_msg/LWimuID70.msg
    LWimu_msg/LWimuID71.msg

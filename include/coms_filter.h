@@ -5,7 +5,7 @@
 #include "ros/ros.h"
 
 #include "joystick2coms/CanMessage.h"
-#include "joystick2coms/VehicleMessage.h"
+#include "joystick2coms/VehicleMessageStamp.h"
 #include "joystick2coms/LWimuID70.h"
 #include "joystick2coms/LWimuID71.h"
 #include "joystick2coms/LWimuID72.h"

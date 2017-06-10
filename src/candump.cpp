@@ -162,7 +162,7 @@ int main(int argc, char **argv)
 	ros::NodeHandle n;
 //	ros::Publisher pub = n.advertise<std_msgs::String>("pub_test",2);
 	ros::Publisher canpub = n.advertise<joystick2coms::CanMessage>("can_raw_pub",2);
-	ros::Publisher vehicle_message = n.advertise<joystick2coms::VehicleMessage>("/coms/vehiclemessage",2);	
+	ros::Publisher vehicle_message = n.advertise<joystick2coms::VehicleMessageStamp>("/coms/vehiclemessage",2);	
 	ros::Publisher LW_imu_ID70 = n.advertise<joystick2coms::LWimuID70>("/LW_Imu/ID70",2);
 	ros::Publisher LW_imu_ID71 = n.advertise<joystick2coms::LWimuID71>("/LW_Imu/ID71",2);
 	ros::Publisher LW_imu_ID72 = n.advertise<joystick2coms::LWimuID72>("/LW_Imu/ID72",2);

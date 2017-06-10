@@ -8,10 +8,12 @@ namespace comsfilter
     //coms: steering_angle and speed
     void vehicleMessage(ros::Publisher pub_handle, joystick2coms::CanMessage *can_frame)
     {
-	joystick2coms::VehicleMessage data;
+	joystick2coms::VehicleMessageStamp data;
 	//TODO
 	data.steering = 0;
 	data.speed = 0;
+	
+	data.header.stamp = ros::Time::now();
 
 	//TODO END
 	pub_handle.publish(data);
