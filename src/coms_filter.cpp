@@ -10,8 +10,8 @@ namespace comsfilter
     {
 	joystick2coms::VehicleMessageStamp data;
 	//TODO
-	data.steering = 0;
-	data.speed = 0;
+	data.steering =((double)can_frame->data[0]*256+ (double)can_frame->data[1])*70/65536-35;
+	data.speed =((double)can_frame->data[2]*256+ (double)can_frame->data[3])*10/65536;
 	
 	data.header.stamp = ros::Time::now();
 

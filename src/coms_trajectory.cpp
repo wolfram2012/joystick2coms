@@ -26,7 +26,7 @@ nav_msgs::Path trajectory;
 void vehicleMessage(const joystick2coms::VehicleMessageStamp& msg)
 {
     ros_time_current = msg.header.stamp;
-    steering = (pi/180) * msg.steering;
+    steering = (pi/180) * msg.steering *27/35;
     speed = msg.speed;
     dis = speed * ((ros_time_current - ros_time_last).toSec());
     ROS_INFO("I heard something!");
@@ -79,8 +79,8 @@ int main(int argc, char** argv)
     ros_time_last = ros_time_current = ros::Time();
     ros::Subscriber sub = n.subscribe("/coms/vehiclemessage",1000,vehicleMessage);
 
-    tf::TransformListener listener(ros::Duration(0.05));  
-    ros::Timer timer = n.createTimer(ros::Duration(0.05), boost::bind(&transformPoint, boost::ref(listener)));
+    tf::TransformListener listener(ros::Duration(0.01));  
+    ros::Timer timer = n.createTimer(ros::Duration(0.01), boost::bind(&transformPoint, boost::ref(listener)));
     
     //trajectory.header.stamp = ros::Time();
     //trajectory.header.frame_id = "coms";
