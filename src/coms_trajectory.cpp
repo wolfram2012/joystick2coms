@@ -1,6 +1,5 @@
 #include "ros/ros.h"
 #include "nav_msgs/Path.h"
-#include "geometry_msgs/Quaternion.h"
 #include "geometry_msgs/PoseStamped.h"
 #include "tf/tf.h"
 #include <tf/transform_listener.h>
@@ -17,6 +16,9 @@ double delta_th = 0;
 ros::Time ros_time_last;
 ros::Time ros_time_current;
 
+geometry_msgs::PoseStamped vb_point;
+geometry_msgs::PoseStamped global_point;
+
 double pi = 3.141593;
 ros::Publisher pose_pub;
 ros::Publisher tra_pub;
@@ -31,16 +33,12 @@ void vehicleMessage(const joystick2coms::VehicleMessageStamp& msg)
     dis = speed * ((ros_time_current - ros_time_last).toSec());
     ROS_INFO("I heard something!");
     ros_time_last = ros_time_current;
-}
 
-void transformPoint(const tf::TransformListener &listener)
-{   	
     kk  = asin((dis * tan(steering)/3.06));
     delta_x  = dis*sin(kk);
     delta_y  = dis*cos(kk);;
     delta_th = 2*kk;
 
-    geometry_msgs::PoseStamped vb_point;
     vb_point.header.stamp = ros::Time();
     vb_point.header.frame_id = "coms";
     vb_point.pose.position.x = delta_x;
@@ -49,17 +47,18 @@ void transformPoint(const tf::TransformListener &listener)
     geometry_msgs::Quaternion quat = tf::createQuaternionMsgFromYaw(delta_th);
     vb_point.pose.orientation = quat;
 
+    pose_pub.publish(global_point);
+    trajectory.header.frame_id = "map";
+    trajectory.poses.push_back(global_point);
+    tra_pub.publish(trajectory);
+}
+
+void transformPoint(const tf::TransformListener &listener)
+{   	
     try
     {
-	geometry_msgs::PoseStamped global_point;
 	listener.transformPose("map", vb_point, global_point);
 	global_point.header.frame_id = "map";
-	pose_pub.publish(global_point);
-	
-	trajectory.header.frame_id = "map";
-        trajectory.poses.push_back(global_point);
-        tra_pub.publish(trajectory);
-
     }
     catch(tf::TransformException& ex)
     {
@@ -79,8 +78,8 @@ int main(int argc, char** argv)
     ros_time_last = ros_time_current = ros::Time();
     ros::Subscriber sub = n.subscribe("/coms/vehiclemessage",1000,vehicleMessage);
 
-    tf::TransformListener listener(ros::Duration(0.01));  
-    ros::Timer timer = n.createTimer(ros::Duration(0.01), boost::bind(&transformPoint, boost::ref(listener)));
+    tf::TransformListener listener(ros::Duration(0.05));  
+    ros::Timer timer = n.createTimer(ros::Duration(0.05), boost::bind(&transformPoint, boost::ref(listener)));
     
     //trajectory.header.stamp = ros::Time();
     //trajectory.header.frame_id = "coms";
@@ -88,3 +87,4 @@ int main(int argc, char** argv)
     ros::spin();
     return 0;
 }
+#include "geometry_msgs/Quaternion.h"

@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     ros::NodeHandle n;
     tf::TransformBroadcaster broadcaster;
     ros::Subscriber tf_sub = n.subscribe("/base_pose",100, poseCallback);
-    ros::Rate r(20);
+    ros::Rate r(100);
     
     while(n.ok())
     {
