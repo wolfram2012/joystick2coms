@@ -24,4 +24,10 @@
        />
     </group>
 
+    <node 
+	pkg="rviz" 
+	type="rviz" 
+	name="my_rviz" 
+    	args="-d $(find joystick2coms)/launch/coms2trajectory.rviz"/>
+
 </launch>

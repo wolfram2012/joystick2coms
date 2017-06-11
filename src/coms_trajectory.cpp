@@ -28,7 +28,7 @@ nav_msgs::Path trajectory;
 void vehicleMessage(const joystick2coms::VehicleMessageStamp& msg)
 {
     ros_time_current = msg.header.stamp;
-    steering = (pi/180) * msg.steering *27/35;
+    steering = -(pi/180) * msg.steering *27/35;
     speed = msg.speed;
     dis = speed * ((ros_time_current - ros_time_last).toSec());
     ROS_INFO("I heard something!");
@@ -40,7 +40,6 @@ void vehicleMessage(const joystick2coms::VehicleMessageStamp& msg)
     delta_th = 2*kk;
 
     vb_point.header.stamp = ros::Time();
-    vb_point.header.frame_id = "coms";
     vb_point.pose.position.x = delta_x;
     vb_point.pose.position.y = delta_y;
     vb_point.pose.position.z = 0;
@@ -48,7 +47,6 @@ void vehicleMessage(const joystick2coms::VehicleMessageStamp& msg)
     vb_point.pose.orientation = quat;
 
     pose_pub.publish(global_point);
-    trajectory.header.frame_id = "map";
     trajectory.poses.push_back(global_point);
     tra_pub.publish(trajectory);
 }
@@ -58,7 +56,6 @@ void transformPoint(const tf::TransformListener &listener)
     try
     {
 	listener.transformPose("map", vb_point, global_point);
-	global_point.header.frame_id = "map";
     }
     catch(tf::TransformException& ex)
     {
@@ -70,6 +67,11 @@ void transformPoint(const tf::TransformListener &listener)
 
 int main(int argc, char** argv)
 {
+    vb_point.pose.orientation.w = 1;
+    vb_point.header.frame_id = "coms";
+    global_point.header.frame_id = "map";
+    trajectory.header.frame_id = "map";
+
     ros::init(argc, argv, "trajectory");
     ros::NodeHandle n;
     pose_pub = n.advertise<geometry_msgs::PoseStamped>("base_pose",100);
