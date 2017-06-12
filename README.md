@@ -1,6 +1,10 @@
 # Joystick2coms
 
-## Control COMS with Joystick
+## Control COMS with Joystick  
+We built a joystick system for Ogai Lab to make our EV-COMS funny.  
+Here is the video:  
+<a href="https://youtu.be/ycNzsPqoMHA" target="_blank"><img src="https://github.com/wolfram2012/Store-Big-Guys/raw/master/joystick2coms/README/bilibililogo.jpg" 
+align="center" alt="euroc" width="360" height="270" border="16" /></a>  
 Having fun controling the EV COMS in our Lab with Joystick!
 
 ## Installation
