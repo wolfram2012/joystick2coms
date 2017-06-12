@@ -1,7 +1,7 @@
 # Joystick2coms
 
 ## Control COMS with Joystick  
-We built a joystick system for Ogai Lab to make our EV-COMS funny.  
+We built a joystick system for Ogai Lab to make our EV-COMS funny. Tested Vehicle: COMS3.    
 Click to view the video:  
 <a href="https://www.youtube.com/embed/ycNzsPqoMHA" target="_blank" align="center">
   <img src="https://github.com/wolfram2012/Store-Big-Guys/raw/master/joystick2coms/README/bilibililogo.jpg" alt="euroc" width="480" height="360" border="16" align="center"/>
@@ -81,7 +81,11 @@ If you want to check the CAN message using CAN-utils:
 <img src="https://github.com/wolfram2012/Store-Big-Guys/raw/master/joystick2coms/README/joystick1.png" width = "423" height = "255" alt="123" />
 </div>    
 
+## Trajectory on Rviz  
 
+If you want to check the trajectory on Rviz:
+>	`roslaunch joystick2coms coms2trajectory.launch`  
 
+<img src="https://github.com/wolfram2012/Store-Big-Guys/raw/master/joystick2coms/README/trajectory.png" width = "480" height = "360" alt="123" align="center"/>
 
 You are welcome.
