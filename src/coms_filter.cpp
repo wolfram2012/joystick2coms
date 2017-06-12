@@ -30,10 +30,33 @@ namespace comsfilter
     {
 	joystick2coms::LWimuID70 data;
 	//TODO
-	data.anglex = 0;
-	data.angley = 0;
-	data.anglez = 0;
-	data.T = 0;
+	if (can_frame->data[0]>127)
+	{can_frame->data[0]=(double)can_frame->data[0]-128;
+	data.anglex = (double)can_frame->data[0]*256+(double)can_frame->data[1];
+	data.anglex =(data.anglex-32768)/100;}
+	else 
+	data.anglex = ((double)can_frame->data[0]*256+(double)can_frame->data[1])/100;
+	
+	if (can_frame->data[2]>127)
+	{can_frame->data[2]=(double)can_frame->data[2]-128;
+	data.angley = (double)can_frame->data[2]*256+(double)can_frame->data[3];
+	data.angley =(data.angley-32768)/100;}
+	else 
+	data.angley = ((double)can_frame->data[2]*256+(double)can_frame->data[3])/100;
+	
+	if (can_frame->data[4]>127)
+	{can_frame->data[4]=(double)can_frame->data[4]-128;
+	data.anglez = (double)can_frame->data[4]*256+(double)can_frame->data[5];
+	data.anglez =(data.anglez-32768)/100;}
+	else 
+	data.anglez = ((double)can_frame->data[4]*256+(double)can_frame->data[5])/100;
+	
+	if (can_frame->data[6]>127)
+	{can_frame->data[6]=(double)can_frame->data[6]-128;
+	data.T = (double)can_frame->data[6]*256+(double)can_frame->data[7];
+	data.T =-(data.T-32768)/100;}
+	else 
+	data.T = ((double)can_frame->data[6]*256+(double)can_frame->data[7])/100;
 
 	//TODO END
 	pub_handle.publish(data);
@@ -44,9 +67,27 @@ namespace comsfilter
     {
 	joystick2coms::LWimuID71 data;
 	//TODO
-	data.accelx = 0;
-	data.accely = 0;
-	data.accelz = 0;
+	if (can_frame->data[0]>127)
+	{can_frame->data[0]=(double)can_frame->data[0]-128;
+	data.accelx = (double)can_frame->data[0]*256+(double)can_frame->data[1];
+	data.accelx =(data.accelx-32768)/100;}
+	else 
+	data.accelx = ((double)can_frame->data[0]*256+(double)can_frame->data[1])/100;
+	
+	if (can_frame->data[2]>127)
+	{can_frame->data[2]=(double)can_frame->data[2]-128;
+	data.accely = (double)can_frame->data[2]*256+(double)can_frame->data[3];
+	data.accely=(data.accely-32768)/100;}
+	else 
+	data.accely = ((double)can_frame->data[2]*256+(double)can_frame->data[3])/100;
+	
+	if (can_frame->data[4]>127)
+	{can_frame->data[4]=(double)can_frame->data[4]-128;
+	data.accelz = (double)can_frame->data[4]*256+(double)can_frame->data[5];
+	data.accelz =(data.accelz-32768)/100;}
+	else 
+	data.accelz = ((double)can_frame->data[4]*256+(double)can_frame->data[5])/100;
+	
 
 	//TODO END
 	pub_handle.publish(data);
@@ -57,9 +98,26 @@ namespace comsfilter
     {
 	joystick2coms::LWimuID72 data;
 	//TODO
-	data.compassx = 0;
-	data.compassy = 0;
-	data.compassz = 0;
+	if (can_frame->data[0]>127)
+	{can_frame->data[0]=(double)can_frame->data[0]-128;
+	data.compassx = (double)can_frame->data[0]*256+(double)can_frame->data[1];
+	data.compassx =(data.compassx-32768)/100;}
+	else 
+	data.compassx = ((double)can_frame->data[0]*256+(double)can_frame->data[1])/100;
+	
+	if (can_frame->data[2]>127)
+	{can_frame->data[2]=(double)can_frame->data[2]-128;
+	data.compassy = (double)can_frame->data[2]*256+(double)can_frame->data[3];
+	data.compassy=(data.compassy-32768)/100;}
+	else 
+	data.compassy = ((double)can_frame->data[2]*256+(double)can_frame->data[3])/100;
+	
+	if (can_frame->data[4]>127)
+	{can_frame->data[4]=(double)can_frame->data[4]-128;
+	data.compassz = (double)can_frame->data[4]*256+(double)can_frame->data[5];
+	data.compassz =(data.compassz-32768)/100;}
+	else 
+	data.compassz = ((double)can_frame->data[4]*256+(double)can_frame->data[5])/100;
 
 	//TODO END
 	pub_handle.publish(data);
@@ -70,15 +128,14 @@ namespace comsfilter
     {
 	joystick2coms::LWimuID75 data;
 	//TODO
-	data.GPSmode = 0;
-	data.starNum = 0;
-	data.HDOP = 0;
-	data.hight = 0;
-	data.UTCh = 0;
-	data.UTCm = 0;
-	data.UTCs = 0;
-	data.UTCms = 0;
-
+	data.GPSmode = (int)can_frame->data[0];
+	data.starNum = (int)can_frame->data[1];
+	data.HDOP = (int)can_frame->data[2];
+	data.hight =(int)can_frame->data[3];
+	data.UTCh = (int)can_frame->data[4];
+	data.UTCm = (int)can_frame->data[5];
+	data.UTCs = (int)can_frame->data[6];
+	data.UTCms = (int)can_frame->data[7];
 	//TODO END
 	pub_handle.publish(data);
     }
@@ -88,8 +145,19 @@ namespace comsfilter
     {
 	joystick2coms::LWimuID76 data;
 	//TODO
-	data.GPSl = 0;
-	data.GPSr = 0;
+	//if (can_frame->data[0]>127)
+	//{can_frame->data[0]=(double)can_frame->data[0]-128;
+	//data.GPSl =(double)can_frame->data[0]*256^3+(double)can_frame->data[1]*256^2+(double)can_frame->data[2]*256+(double)can_frame->data[3];
+	//data.GPSl =(data.GPSl-2147483648)/10^7;}
+	//else 
+	//data.GPSl =((double)can_frame->data[0]*256^3+(double)can_frame->data[1]*256^2+(double)can_frame->data[2]*256+(double)can_frame->data[3])/10^7;
+	
+	//if (can_frame->data[4]>127)
+	//{can_frame->data[4]=(double)can_frame->data[4]-128;
+	//data.GPSr =(double)can_frame->data[4]*256^3+(double)can_frame->data[5]*256^2+(double)can_frame->data[6]*256+(double)can_frame->data[7];
+	//data.GPSr =(data.GPSr-2147483648)/10^7;}
+	//else
+	 //data.GPSr =((double)can_frame->data[4]*256^3+(double)can_frame->data[5]*256^2+(double)can_frame->data[6]*256+(double)can_frame->data[7])/10^7;
 
 	//TODO END
 	pub_handle.publish(data);
@@ -100,10 +168,34 @@ namespace comsfilter
     {
 	joystick2coms::LWimuID78 data;
 	//TODO
-	data.roll = 0;
-	data.pitch = 0;
-	data.yaw = 0;
-	data.pz = 0;
+	if (can_frame->data[0]>127)
+	{can_frame->data[0]=(double)can_frame->data[0]-128;
+	data.roll = (double)can_frame->data[0]*256+(double)can_frame->data[1];
+	data.roll =(data.roll-32768)/100;}
+	else 
+	data.roll = ((double)can_frame->data[0]*256+(double)can_frame->data[1])/100;
+	
+	if (can_frame->data[2]>127)
+	{can_frame->data[2]=(double)can_frame->data[2]-128;
+	data.pitch = (double)can_frame->data[2]*256+(double)can_frame->data[3];
+	data.pitch =(data.pitch-32768)/100;}
+	else 
+	data.pitch = ((double)can_frame->data[2]*256+(double)can_frame->data[3])/100;
+	
+	if (can_frame->data[4]>127)
+	{can_frame->data[4]=(double)can_frame->data[4]-128;
+	data.yaw = (double)can_frame->data[4]*256+(double)can_frame->data[5];
+	data.yaw =(data.yaw-32768)/100;}
+	else 
+	data.yaw = ((double)can_frame->data[4]*256+(double)can_frame->data[5])/100;
+	
+	if (can_frame->data[6]>127)
+	{can_frame->data[6]=(double)can_frame->data[6]-128;
+	data.pz = (double)can_frame->data[6]*256+(double)can_frame->data[7];
+	data.pz =(data.pz-32768)/100;}
+	else 
+	data.pz = ((double)can_frame->data[6]*256+(double)can_frame->data[7])/100;
+	
 
 	//TODO END
 	pub_handle.publish(data);
