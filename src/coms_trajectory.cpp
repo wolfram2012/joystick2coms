@@ -13,6 +13,7 @@ double kk  = 0;
 double delta_x  = 0;
 double delta_y  = 0;
 double delta_th = 0;
+double sum_dis = 0;
 ros::Time ros_time_last;
 ros::Time ros_time_current;
 
@@ -28,13 +29,16 @@ nav_msgs::Path trajectory;
 void vehicleMessage(const joystick2coms::VehicleMessageStamp& msg)
 {
     ros_time_current = msg.header.stamp;
-    steering = -(pi/180) * msg.steering *27/35;
+    steering = -(pi/180) * (msg.steering-1.32) *27/35;
+    //if (abs(msg.steering)<2)
+	//steering = 0;
     speed = msg.speed;
     dis = speed * ((ros_time_current - ros_time_last).toSec());
-    ROS_INFO("I heard something!");
+    sum_dis += dis;
+    ROS_INFO("I have run %f !",sum_dis);
     ros_time_last = ros_time_current;
 
-    kk  = asin((dis * tan(steering)/3.06));
+    kk  = asin((dis * tan(steering)/2.56));
     delta_x  = dis*sin(kk);
     delta_y  = dis*cos(kk);;
     delta_th = 2*kk;
@@ -80,8 +84,8 @@ int main(int argc, char** argv)
     ros_time_last = ros_time_current = ros::Time();
     ros::Subscriber sub = n.subscribe("/coms/vehiclemessage",1000,vehicleMessage);
 
-    tf::TransformListener listener(ros::Duration(0.05));  
-    ros::Timer timer = n.createTimer(ros::Duration(0.05), boost::bind(&transformPoint, boost::ref(listener)));
+    tf::TransformListener listener(ros::Duration(0.01));  
+    ros::Timer timer = n.createTimer(ros::Duration(0.01), boost::bind(&transformPoint, boost::ref(listener)));
     
     //trajectory.header.stamp = ros::Time();
     //trajectory.header.frame_id = "coms";

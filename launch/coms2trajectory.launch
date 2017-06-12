@@ -21,6 +21,7 @@
         pkg="joystick2coms" 
         name="trajectory" 
         type="trajectory"
+	output = "screen"
        />
     </group>
 
