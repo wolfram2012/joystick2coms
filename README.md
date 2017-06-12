@@ -4,7 +4,7 @@
 We built a joystick system for Ogai Lab to make our EV-COMS funny.  
 Click to view the video:  
 <a href="https://www.youtube.com/embed/ycNzsPqoMHA" target="_blank" align="center">
-  <img src="https://github.com/wolfram2012/Store-Big-Guys/raw/master/joystick2coms/README/bilibililogo.jpg" alt="euroc" width="480" height="270" border="16" align="center"/>
+  <img src="https://github.com/wolfram2012/Store-Big-Guys/raw/master/joystick2coms/README/bilibililogo.jpg" alt="euroc" width="480" height="360" border="16" align="center"/>
 </a>  
 Having fun controling the EV COMS in our Lab with Joystick!
 
